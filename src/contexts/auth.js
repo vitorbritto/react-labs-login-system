@@ -22,6 +22,7 @@ export const AuthProvider = ({ children }) => {
 
     const login = (email, password) => {
         const users = JSON.parse(localStorage.getItem('users'));
+        console.log('🚀 ~ file: auth.js:25 ~ login ~ users', users);
         const foundUser = users?.filter(user => user.email === email);
 
         if (foundUser?.length) {
@@ -56,8 +57,13 @@ export const AuthProvider = ({ children }) => {
         if (users) {
             newUser = [...users, { email, password }];
         } else {
+            // eslint-disable-next-line
             newUser = [{ email, password }];
         }
+
+        localStorage.setItem('users', JSON.stringify(newUser));
+        
+        console.log('🚀 ~ file: auth.js:62 ~ signup ~ newUser', newUser);
     };
 
     const logout = () => {
